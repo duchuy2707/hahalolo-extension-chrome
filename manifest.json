@@ -6,6 +6,7 @@
   "permissions": [
     "activeTab",
     "*://www.hahalolo.com/*",
+    "*://*.hahalolo.com/*",
     "declarativeContent",
     "storage"
   ],
