@@ -31,6 +31,10 @@
             "projectName": "Backend hotel"
         },
         {
+            "path": "https://l-backend-api.hahalolo.com:8321",
+            "projectName": "Backend"
+        },
+        {
             "path": "https://l-newsfeed-api.hahalolo.com:1505",
             "projectName": "Newsfeed"
         },
@@ -53,6 +57,10 @@
         {
             "path": "https://l-wallet-api.hahalolo.com:1605",
             "projectName": "Wallet"
+        },
+        {
+            "path": "https://l-business-api.hahalolo.com:6012",
+            "projectName": "Business"
         }
     ];
 
@@ -61,18 +69,24 @@
     const onClickHref = (domains) => `
         (() => {
             const domains = ${domains};
-            console.log(window.location.hostname.split('.')[0] + '-api');
             const urlApi = domains.find((item) => item.path.indexOf(window.location.hostname.split('.')[0] + '-api') > -1);
-            console.log(urlApi);
             if (urlApi) window.location.href = urlApi.path + '/_docs_';
         })();
     `;
 
-    btnFillData.onclick = function () {
-        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            chrome.tabs.executeScript(
-                tabs[0].id,
-                { code: onClickHref(JSON.stringify(domains)) });
-        });
+    if (btnFillData) {
+        btnFillData.onclick = function () {
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                chrome.scripting.executeScript(
+                    tabs[0].id,
+                    { code: onClickHref(JSON.stringify(domains)) });
+
+                chrome.tabs.onUpdated.addListener(function (tabId) {
+                    chrome.scripting.executeScript(
+                        tabId,
+                        { code: 'console.log(123123)' });
+                });
+            });
+        }
     }
 })();

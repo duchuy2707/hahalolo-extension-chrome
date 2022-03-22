@@ -1,22 +1,20 @@
 {
-  "name": "Hahalolo extension chrome",
+  "name": "Hahalolo Extension Chrome",
   "version": "1.0.0",
-  "description": "Extension support something",
-  "manifest_version": 2,
+  "description": "Extension support something for hahalolo.com, and more subdomain",
+  "manifest_version": 3,
   "permissions": [
-    "activeTab",
-    "*://www.hahalolo.com/*",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
     "*://*.hahalolo.com/*",
-    "declarativeContent",
-    "storage"
+    "*://www.hahalolo.com/*"
   ],
   "background": {
-    "scripts": [
-      "src/app.js"
-    ],
-    "persistent": false
+    "service_worker": "src/app.js"
   },
-  "browser_action": {
+  "action": {
     "default_popup": "src/popup/popup.html",
     "default_icon": {
       "16": "images/img_16.png",
@@ -30,5 +28,25 @@
     "32": "images/img_32.png",
     "48": "images/img_48.png",
     "128": "images/img_128.png"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "matches": [],
+      "extension_ids": [],
+      "resources": [
+        "data/account.json"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.hahalolo.com/auth/signin"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "src/background/login.js"
+      ]
+    }
+  ]
 }
