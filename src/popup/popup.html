@@ -66,15 +66,6 @@
         </div>
         <div style="width: 200px; margin-top: 5px">
             <div class="box">
-                <div class="title-box">Fill data to form</div>
-                <div class="content-box">
-                    <button id="btnFillData"
-                        style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Fill
-                        Data</button>
-                </div>
-            </div>
-
-            <div class="box">
                 <div class="title-box">Auto Reaction</div>
                 <!-- <div style="padding: 5px; margin-bottom: 10px">
                     Số lượng reaction: <span id="countReaction">5</span>
@@ -88,10 +79,31 @@
             </div>
 
             <div class="box">
-                <div class="title-box">Accept Friend Request</div>
+                <div class="title-box">Auto Comment</div>
+                <div class="content-box">
+                    <button id="btnStartAutoComment"
+                        style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Start</button>
+                    <button id="btnStopAutoComment"
+                        style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Stop</button>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="title-box">Friend Request</div>
                 <div class="content-box">
                     <button id="btnAcceptFriendRequest"
                         style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Accept</button>
+                    <button id="btnDeleteFriendRequest"
+                        style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Delete</button>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="title-box">Fill data to form</div>
+                <div class="content-box">
+                    <button id="btnFillData"
+                        style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Fill
+                        Data</button>
                 </div>
             </div>
 
@@ -110,12 +122,15 @@
                         style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Login</button>
                 </div>
             </div> -->
-
+            <!-- 
             <hr style="width: 150px">
             <div style="text-align: center;">
                 <button id="btnReload"
                     style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Reload</button>
-            </div>
+            </div> -->
+
+            <hr style="width: 150px">
+            <div style="text-align: center;font-style: italic;">Copyright &copy; duchuy2707</div>
         </div>
     </div>
     <script src="popup.js"></script>
@@ -123,7 +138,8 @@
     <script src="href.js"></script>
     <script src="login.js"></script>
     <script src="auto-reaction.js"></script>
-    <script src="accept-friend-request.js"></script>
+    <script src="auto-comment.js"></script>
+    <script src="friend-request.js"></script>
 </body>
 
 </html>
