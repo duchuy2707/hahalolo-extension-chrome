@@ -56,57 +56,112 @@
         .content-box {
             text-align: center;
         }
+
+        .vl {
+            border-left: 1px solid grey;
+            height: 320px;
+            position: absolute;
+            left: 50%;
+            margin-left: -55px;
+            top: 120px;
+        }
+
+        .column {
+            float: left;
+            padding: 10px;
+            /* Should be removed. Only for demonstration */
+        }
+
+        input {
+            padding: 2px;
+            display: block;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            background-color: #f1f1f1;
+            margin-top: 5px;
+            /* margin-bottom: 10px; */
+            box-sizing: border-box;
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+            outline: none;
+            margin-left: 7px;
+        }
+
+        input:focus {
+            border: none;
+            border-bottom: 1px solid black
+        }
+
+        ::placeholder {
+            font-size: 0.7em;
+        }
     </style>
 </head>
 
 <body>
-    <div style="border:1px solid #ddd">
+    <div style="border:1px solid #ddd; height:500px">
         <div style="color: #000!important; background-color: #f1f1f1!important; padding:5px">
             <h3 style="text-align: center; font-weight: bold; font-style: italic;">Hahalolo Extension Chrome</h3>
         </div>
-        <div style="width: 200px; margin-top: 5px">
-            <div class="box">
-                <div class="title-box">Auto Reaction</div>
-                <!-- <div style="padding: 5px; margin-bottom: 10px">
+        <div style="width: 220px; margin-top: 5px">
+            <div class="column" style="width: 200px;">
+                <div class="box">
+                    <div class="title-box">Auto Reaction</div>
+                    <!-- <div style="padding: 5px; margin-bottom: 10px">
                     Số lượng reaction: <span id="countReaction">5</span>
                 </div> -->
-                <div class="content-box">
-                    <button id="btnStartAutoReaction"
-                        style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Start</button>
-                    <button id="btnStopAutoReaction"
-                        style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Stop</button>
+                    <div class="content-box">
+                        <button id="btnStartAutoReaction"
+                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Start</button>
+                        <button id="btnStopAutoReaction"
+                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Stop</button>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="title-box">Auto Comment</div>
+                    <div class="content-box">
+                        <button id="btnStartAutoComment"
+                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Start</button>
+                        <button id="btnStopAutoComment"
+                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Stop</button>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="title-box">Friend Request</div>
+                    <div class="content-box">
+                        <button id="btnAcceptFriendRequest"
+                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Accept</button>
+                        <button id="btnDeleteFriendRequest"
+                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Delete</button>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="title-box">Fill data to form</div>
+                    <div class="content-box">
+                        <button id="btnFillData"
+                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Fill
+                            Data</button>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="title-box">Change price</div>
+                    <div class="content-box">
+                        <div style="margin-bottom: 10px"><input id="input-price" placeholder="Price..." /></div>
+                        <button id="btnChangePrice"
+                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Change</button>
+                        <button id="btnChangeUp"
+                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Up</button>
+                        <button id="btnChangeDown"
+                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Down</button>
+                        <button id="btnPriceRestore"
+                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Restore</button>
+                    </div>
                 </div>
             </div>
-
-            <div class="box">
-                <div class="title-box">Auto Comment</div>
-                <div class="content-box">
-                    <button id="btnStartAutoComment"
-                        style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Start</button>
-                    <button id="btnStopAutoComment"
-                        style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Stop</button>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="title-box">Friend Request</div>
-                <div class="content-box">
-                    <button id="btnAcceptFriendRequest"
-                        style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Accept</button>
-                    <button id="btnDeleteFriendRequest"
-                        style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Delete</button>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="title-box">Fill data to form</div>
-                <div class="content-box">
-                    <button id="btnFillData"
-                        style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Fill
-                        Data</button>
-                </div>
-            </div>
-
             <!-- <div class="box">
                 <div class="title-box">Href link nestjs</div>
                 <div class="content-box">
@@ -114,25 +169,37 @@
                         style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Href</button>
                 </div>
             </div> -->
+            <!-- <div class="vl"></div>
 
-            <!-- <div class="box">
-                <div class="title-box">Login</div>
-                <div class="content-box">
-                    <button id="btnLogin"
-                        style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Login</button>
+            <div class="column" style="width: 300px;">
+                <div class="box">
+                    <div class="title-box">Login</div>
+                    <div class="content-box">
+                        <button id="btnLogin"
+                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Login</button>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="title-box">New Info</div>
+                    <div class="content-box">
+                        <div><input id="username" placeholder="Username" /></div>
+                        <div><input type="password" id="password" placeholder="Password" /></div>
+                        <button id="btnSaveAccount"
+                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Save</button>
+                    </div>
                 </div>
             </div> -->
-            <!-- 
-            <hr style="width: 150px">
+
+            <!-- <hr style="width: 150px">
             <div style="text-align: center;">
                 <button id="btnReload"
                     style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Reload</button>
             </div> -->
 
-            <hr style="width: 150px">
-            <div style="text-align: center;font-style: italic;">Copyright &copy; duchuy2707</div>
         </div>
     </div>
+    <hr style="width: 150px">
+    <div style="text-align: center;font-style: italic;">Copyright &copy; duchuy2707</div>
     <script src="popup.js"></script>
     <script src="fill-data.js"></script>
     <script src="href.js"></script>
@@ -140,6 +207,7 @@
     <script src="auto-reaction.js"></script>
     <script src="auto-comment.js"></script>
     <script src="friend-request.js"></script>
+    <script src="change-price.js"></script>
 </body>
 
 </html>

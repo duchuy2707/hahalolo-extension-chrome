@@ -13,4 +13,7 @@
 1. Update fix bug auto accept/delete friend request
    
 # 1.0.4
-1. Reopen action Fill dâta
+1. Reopen action Fill data
+
+# 1.0.5
+1. Change price of filght

@@ -8,11 +8,33 @@
     });
 
     const btnLogin = document.getElementById('btnLogin');
+    const btnSave = document.getElementById('btnSaveAccount');
 
     const account = {
         username: 'duchuy2707@gmail.com',
         password: 'abc123'
     };
+
+    if (btnSave) {
+        btnSave.onclick = async function () {
+            chrome.storage.sync.set({ accounts });
+
+            let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+            chrome.storage.sync.set({ account });
+
+            chrome.scripting.executeScript({
+                target: { tabId: tab.id },
+                function: () => {
+                    const username = document.getElementById('username');
+                    const password = document.getElementById('password');
+
+                    
+                },
+            });
+        };
+    }
+
 
     if (btnLogin) {
         btnLogin.onclick = async function () {
