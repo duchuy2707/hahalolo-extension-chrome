@@ -59,17 +59,15 @@
 
         .vl {
             border-left: 1px solid grey;
-            height: 320px;
+            height: 70%;
             position: absolute;
             left: 50%;
-            margin-left: -55px;
-            top: 120px;
+            top: 20%;
         }
 
         .column {
             float: left;
             padding: 10px;
-            /* Should be removed. Only for demonstration */
         }
 
         input {
@@ -99,12 +97,12 @@
 </head>
 
 <body>
-    <div style="border:1px solid #ddd; height:500px">
+    <div style="border:1px solid #ddd; height:400px">
         <div style="color: #000!important; background-color: #f1f1f1!important; padding:5px">
             <h3 style="text-align: center; font-weight: bold; font-style: italic;">Hahalolo Extension Chrome</h3>
         </div>
-        <div style="width: 220px; margin-top: 5px">
-            <div class="column" style="width: 200px;">
+        <div style="width: 420px; margin-top: 5px">
+            <div class="column" style="width: 45%;">
                 <div class="box">
                     <div class="title-box">Auto Reaction</div>
                     <!-- <div style="padding: 5px; margin-bottom: 10px">
@@ -138,6 +136,17 @@
                     </div>
                 </div>
 
+            </div>
+            <!-- <div class="box">
+                <div class="title-box">Href link nestjs</div>
+                <div class="content-box">
+                    <button id="btnHref"
+                        style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Href</button>
+                </div>
+            </div> -->
+            <div class="vl"></div>
+
+            <div class="column" style="width: 45%;">
                 <div class="box">
                     <div class="title-box">Fill data to form</div>
                     <div class="content-box">
@@ -161,34 +170,16 @@
                             style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Restore</button>
                     </div>
                 </div>
-            </div>
-            <!-- <div class="box">
-                <div class="title-box">Href link nestjs</div>
-                <div class="content-box">
-                    <button id="btnHref"
-                        style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Href</button>
-                </div>
-            </div> -->
-            <!-- <div class="vl"></div>
 
-            <div class="column" style="width: 300px;">
                 <div class="box">
-                    <div class="title-box">Login</div>
+                    <div class="title-box">Coin</div>
                     <div class="content-box">
-                        <button id="btnLogin"
-                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Login</button>
+                        <button id="btnDiggingCoins"
+                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Digging
+                            Coins</button>
                     </div>
                 </div>
-                <div class="box">
-                    <div class="title-box">New Info</div>
-                    <div class="content-box">
-                        <div><input id="username" placeholder="Username" /></div>
-                        <div><input type="password" id="password" placeholder="Password" /></div>
-                        <button id="btnSaveAccount"
-                            style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Save</button>
-                    </div>
-                </div>
-            </div> -->
+            </div>
 
             <!-- <hr style="width: 150px">
             <div style="text-align: center;">
@@ -208,6 +199,7 @@
     <script src="auto-comment.js"></script>
     <script src="friend-request.js"></script>
     <script src="change-price.js"></script>
+    <script src="digging-coins.js"></script>
 </body>
 
 </html>
