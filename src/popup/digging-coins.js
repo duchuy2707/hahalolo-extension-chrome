@@ -19,26 +19,28 @@
                     setInterval(() => {
                         const coinBox = document.querySelector('[viewBox="0 0 800 800"]');
                         if (coinBox && !timeout) {
-                            timeout = setTimeout(() => {
-                                const button = coinBox.closest("div");
-                                const autoClick = new MouseEvent("click", {
-                                    bubbles: true,
-                                    cancelable: true,
-                                    view: window,
-                                });
+                            const button = coinBox.closest("div");
+                            if (button) {
+                                timeout = setTimeout(() => {
+                                    const autoClick = new MouseEvent("click", {
+                                        bubbles: true,
+                                        cancelable: true,
+                                        view: window,
+                                    });
 
-                                button.dispatchEvent(autoClick);
+                                    button.dispatchEvent(autoClick);
 
-                                button.focus();
-                                button.click();
-                                count += 1;
-                                console.log(`%c ::[Click]:: ${count} - ${time}`, `color:Green`)
+                                    button.focus();
+                                    button.click();
+                                    count += 1;
+                                    console.log(`%c ::[Click]:: ${count} - ${time}`, `color:Green`)
 
-                                clearTimeout(timeout);
-                                timeout = 0;
-                            }, time);
+                                    clearTimeout(timeout);
+                                    timeout = 0;
+                                }, time);
 
-                            time = Math.floor(Math.random() * (15000 - 10000)) + 10000; // random time click between 10s ~ 15s
+                                time = Math.floor(Math.random() * (15000 - 10000)) + 10000; // random time click between 10s ~ 15s
+                            }
                         }
                     }, time);
                 },
