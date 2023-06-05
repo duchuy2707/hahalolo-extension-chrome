@@ -23,3 +23,7 @@
 
 # 1.3.1
 1. Fix error when click digging coin button 
+
+# 1.3.2
+1. Show total digging coins
+2. Show count click in tab

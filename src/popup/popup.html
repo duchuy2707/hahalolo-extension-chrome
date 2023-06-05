@@ -93,11 +93,37 @@
         ::placeholder {
             font-size: 0.7em;
         }
+
+        .h-badge {
+            min-width: 18px;
+            padding: 2px 4px;
+            border-radius: 0.5rem;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            color: white;
+            background: #f07474;
+        }
+
+        .tableStyle {
+            border: 1px solid #ccc;
+            width: 80%;
+        }
+
+        .tableStyle th {
+            background-color: #cad8fa;
+            padding: 3px;
+        }
+
+        .tableStyle td {
+            background-color: #f0e7da;
+            padding: 3px;
+        }
     </style>
 </head>
 
 <body>
-    <div style="border:1px solid #ddd; height:400px">
+    <div style="border:1px solid #ddd; height:450px">
         <div style="color: #000!important; background-color: #f1f1f1!important; padding:5px">
             <h3 style="text-align: center; font-weight: bold; font-style: italic;">Hahalolo Extension Chrome</h3>
         </div>
@@ -174,6 +200,60 @@
                 <div class="box">
                     <div class="title-box">Coin</div>
                     <div class="content-box">
+                        <div style="margin-bottom: 5px;">Total Coins: <span class="h-badge" id="totalCoins">0</span>
+                        </div>
+                        <hr style="width: 70%;">
+                        <div style="margin-bottom: 5px;">
+                            <table style="margin: 0 auto;" class="tableStyle">
+                                <tr>
+                                    <th>
+                                        nf
+                                    </th>
+                                    <th>
+                                        ex
+                                    </th>
+                                    <th>
+                                        tu
+                                    </th>
+                                    <th>
+                                        ho
+                                    </th>
+                                    <th>
+                                        fl
+                                    </th>
+                                    <th>
+                                        ca
+                                    </th>
+                                    <th>
+                                        sh
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td id="nf">
+                                        0
+                                    </td>
+                                    <td id='ex'>
+                                        0
+                                    </td>
+                                    <td id='tu'>
+                                        0
+                                    </td>
+                                    <td id='ho'>
+                                        0
+                                    </td>
+                                    <td id='fl'>
+                                        0
+                                    </td>
+                                    <td id='ca'>
+                                        0
+                                    </td>
+                                    <td id='sh'>
+                                        0
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <hr style="width: 70%;">
                         <button id="btnDiggingCoins"
                             style="border-radius: 8px; border: 1px solid; font-weight: bold; font-style: italic; margin-bottom: 5px;">Digging
                             Coins</button>

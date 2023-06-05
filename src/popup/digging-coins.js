@@ -1,9 +1,28 @@
 'use strict';
 
 (() => {
-    const btnDiggingCoins = document.getElementById('btnDiggingCoins');
+    chrome.storage.sync.get(['totalCoins', 'oldDay', 'table'], function (data) {
+        const today = new Date().toISOString().slice(0, 10);
 
-    console.log('\n--------\n', btnDiggingCoins, '\n--------\n');
+        if (!data.oldDay || today !== data.oldDay) {
+            chrome.storage.sync.set({ totalCoins: 0 });
+            chrome.storage.sync.set({ table: {} });
+            chrome.storage.sync.set({ oldDay: today });
+        }
+
+        const spanTotalCoins = document.getElementById('totalCoins');
+        if (spanTotalCoins) spanTotalCoins.innerHTML = data.totalCoins;
+
+        const { table = {} } = data;
+        const keys = Object.keys(table);
+
+        for (let i = 0; i < keys.length; i++) {
+            const td = document.getElementById(keys[i]);
+            td.innerHTML = table[keys[i]] || 0;
+        }
+    });
+
+    const btnDiggingCoins = document.getElementById('btnDiggingCoins');
 
     if (btnDiggingCoins) {
         btnDiggingCoins.onclick = async function () {
@@ -12,6 +31,7 @@
             chrome.scripting.executeScript({
                 target: { tabId: tab.id },
                 function: () => {
+
                     let count = 0;
                     let timeout = 0;
                     let time = 5000;
@@ -33,10 +53,61 @@
                                     button.focus();
                                     button.click();
                                     count += 1;
-                                    console.log(`%c ::[Click]:: ${count} - ${time}`, `color:Green`)
 
                                     clearTimeout(timeout);
                                     timeout = 0;
+
+                                    setTimeout(() => {
+                                        // show số coin
+                                        const hostname = window.location.hostname;
+                                        const boxCoin = document.querySelectorAll('[class*="MuiBackdrop-root"');
+                                        if (boxCoin[0]) {
+                                            const divContent = boxCoin[0].querySelectorAll('div');
+
+                                            if (divContent.length > 0) {
+                                                const coins = parseInt(divContent[divContent.length - 1].textContent.split(' ')[0], 10);
+                                                if (coins !== NaN && Number.isInteger(coins)) {
+                                                    chrome.storage.sync.get(['totalCoins', 'oldDay', 'table'], function (data) {
+                                                        const today = new Date().toISOString().slice(0, 10);
+                                                        let totalCoins = (data.totalCoins || 0) + coins;
+
+                                                        if (!data.oldDay || today !== data.oldDay) {
+                                                            totalCoins = 0;
+                                                            chrome.storage.sync.set({ 'oldDay': today });
+                                                        }
+
+                                                        console.log(`%c ::[Click]:: ${count}\n::[Coins]":: ${coins}\n::[Total]:: ${totalCoins}\n::[Time:: ${time}`, `color:Green`)
+
+                                                        chrome.storage.sync.set({ totalCoins });
+
+                                                        // add vào table count
+                                                        const { table = {} } = data;
+                                                        if (hostname.indexOf('newsfeed') !== -1) {
+                                                            table.nf = (table.nf || 0) + 1;
+                                                        } else if (hostname.indexOf('experience') !== -1) {
+                                                            table.ex = (table.ex || 0) + 1;
+                                                        } else if (hostname.indexOf('tour') !== -1) {
+                                                            table.tu = (table.tu || 0) + 1;
+                                                        } else if (hostname.indexOf('hotel') !== -1) {
+                                                            table.ho = (table.ho || 0) + 1;
+                                                        } else if (hostname.indexOf('shopping') !== -1) {
+                                                            table.sh = (table.sh || 0) + 1;
+                                                        } else if (hostname.indexOf('flight') !== -1) {
+                                                            table.fl = (table.fl || 0) + 1;
+                                                        } else if (hostname.indexOf('car') !== -1) {
+                                                            table.ca = (table.ca || 0) + 1;
+                                                        } else {
+                                                            table.nf = (table.nf || 0) + 1;
+                                                        }
+
+                                                        chrome.storage.sync.set({ table });
+                                                    });
+                                                } else console.log(`%c ::[Click]:: ${count}\n::[Time]:: ${time}`, `color:Green`)
+                                            } else console.log(`%c ::[Click]:: ${count}\n::[Time]:: ${time}`, `color:Green`)
+                                        } else console.log(`%c ::[Click]:: ${count}\n::[Time]:: ${time}`, `color:Green`)
+                                    }, 3000);
+
+
                                 }, time);
 
                                 time = Math.floor(Math.random() * (15000 - 10000)) + 10000; // random time click between 10s ~ 15s
