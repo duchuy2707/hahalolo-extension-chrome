@@ -27,3 +27,8 @@
 # 1.3.2
 1. Show total digging coins
 2. Show count click in tab
+
+# 1.3.3
+1. Update Status button clicked
+2. Fix error get domain name
+3. Console more information
