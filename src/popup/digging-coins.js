@@ -3,17 +3,19 @@
 (() => {
     chrome.storage.sync.get(['totalCoins', 'oldDay', 'table'], function (data) {
         const today = new Date().toISOString().slice(0, 10);
+        let { totalCoins = 0, table = {} } = data;
 
         if (!data.oldDay || today !== data.oldDay) {
             chrome.storage.sync.set({ totalCoins: 0 });
             chrome.storage.sync.set({ table: {} });
             chrome.storage.sync.set({ oldDay: today });
+            totalCoins = 0;
+            table = {};
         }
 
         const spanTotalCoins = document.getElementById('totalCoins');
-        if (spanTotalCoins) spanTotalCoins.innerHTML = data.totalCoins || 0;
+        if (spanTotalCoins) spanTotalCoins.innerHTML = totalCoins;
 
-        const { table = {} } = data;
         const keys = Object.keys(table);
 
         for (let i = 0; i < keys.length; i++) {
@@ -32,19 +34,19 @@
             chrome.scripting.executeScript({
                 target: { tabId: tab.id },
                 function: () => {
-
                     let count = 0;
                     let timeout = 0;
                     let time = 5000;
                     console.log(`%c----------------------:: [START] ::----------------------`, `color:Green`)
                     setInterval(() => {
                         const coinBox = document.querySelector('[viewBox="0 0 800 800"]');
+
                         if (coinBox && !timeout) {
                             const button = coinBox.closest("div");
                             if (button) {
                                 timeout = setTimeout(() => {
                                     const autoClick = new MouseEvent("click", {
-                                        bubbles: true,
+                                        // bubbles: true,
                                         cancelable: true,
                                         view: window,
                                     });
@@ -61,52 +63,59 @@
                                     setTimeout(() => {
                                         // show số coin
                                         const hostname = window.location.href;
-                                        const boxCoin = document.querySelectorAll('[class*="MuiBackdrop-root"');
-                                        if (boxCoin[0]) {
-                                            const divContent = boxCoin[0].querySelectorAll('div');
 
-                                            if (divContent.length > 0) {
-                                                const coins = parseInt(divContent[divContent.length - 1].textContent.split(' ')[0], 10);
-                                                if (coins !== NaN && Number.isInteger(coins)) {
-                                                    chrome.storage.sync.get(['totalCoins', 'oldDay', 'table'], function (data) {
-                                                        const today = new Date().toISOString().slice(0, 10);
-                                                        let totalCoins = (data.totalCoins || 0) + coins;
+                                        const coins = parseInt(window.localStorage.getItem('coinNumber') || 0, 10);
 
-                                                        if (!data.oldDay || today !== data.oldDay) {
-                                                            totalCoins = 0;
-                                                            chrome.storage.sync.set({ 'oldDay': today });
-                                                        }
+                                        if (coins) {
+                                            chrome.storage.sync.get(['totalCoins', 'oldDay', 'table'], function (data) {
+                                                const today = new Date().toISOString().slice(0, 10);
+                                                let totalCoins = (data.totalCoins || 0) + coins;
 
-                                                        console.log(`%c::[Click]:: ${count}\n::[Url]:: ${hostname}\n::[Coins]":: ${coins}\n::[Total]:: ${totalCoins}\n::[Time:: ${time}`, `color:Green`)
+                                                if (!data.oldDay || today !== data.oldDay) {
+                                                    totalCoins = 0;
+                                                    chrome.storage.sync.set({ 'oldDay': today });
+                                                }
 
-                                                        chrome.storage.sync.set({ totalCoins });
+                                                console.log(`%c::[Click]:: ${count}\n::[Url]:: ${hostname}\n::[Coins]":: ${coins}\n::[Total]:: ${totalCoins}\n::[Time:: ${time}`, `color:Green`)
 
-                                                        // add vào table count
-                                                        const { table = {} } = data;
-                                                        if (hostname.indexOf('experience') !== -1) {
-                                                            table.ex = (table.ex || 0) + 1;
-                                                        } else if (hostname.indexOf('tour') !== -1) {
-                                                            table.tu = (table.tu || 0) + 1;
-                                                        } else if (hostname.indexOf('hotel') !== -1) {
-                                                            table.ho = (table.ho || 0) + 1;
-                                                        } else if (hostname.indexOf('shopping') !== -1) {
-                                                            table.sh = (table.sh || 0) + 1;
-                                                        } else if (hostname.indexOf('flight') !== -1) {
-                                                            table.fl = (table.fl || 0) + 1;
-                                                        } else if (hostname.indexOf('car') !== -1) {
-                                                            table.ca = (table.ca || 0) + 1;
-                                                        } else if (hostname.indexOf('newsfeed') !== -1) {
-                                                            table.nf = (table.nf || 0) + 1;
-                                                        } else {
-                                                            table.nf = (table.nf || 0) + 1;
-                                                        }
+                                                chrome.storage.sync.set({ totalCoins });
 
-                                                        chrome.storage.sync.set({ table });
-                                                    });
-                                                } else console.log(`%c::[Click]:: ${count}\n::[Url]:: ${hostname}\n::[Status]:: Don't get coin number\n::[Time]:: ${time}`, `color:Green`)
-                                            } else console.log(`%c::[Click]:: ${count}\n::[Url]:: ${hostname}\n::[Status]:: No box coin\n::[Time]:: ${time}`, `color:Green`)
-                                        } else console.log(`%c::[Click]:: ${count}\n::[Url]:: ${hostname}\n::[Status]:: No box coin\n::[Time]:: ${time}`, `color:Green`)
-                                    }, 2000);
+                                                // add vào table count
+                                                const { table = {} } = data;
+                                                if (hostname.indexOf('experience') !== -1) {
+                                                    table.ex = (table.ex || 0) + 1;
+                                                } else if (hostname.indexOf('tour') !== -1) {
+                                                    table.tu = (table.tu || 0) + 1;
+                                                } else if (hostname.indexOf('hotel') !== -1) {
+                                                    table.ho = (table.ho || 0) + 1;
+                                                } else if (hostname.indexOf('shopping') !== -1) {
+                                                    table.sh = (table.sh || 0) + 1;
+                                                } else if (hostname.indexOf('flight') !== -1) {
+                                                    table.fl = (table.fl || 0) + 1;
+                                                } else if (hostname.indexOf('car') !== -1) {
+                                                    table.ca = (table.ca || 0) + 1;
+                                                } else if (hostname.indexOf('newsfeed') !== -1) {
+                                                    table.nf = (table.nf || 0) + 1;
+                                                } else {
+                                                    table.nf = (table.nf || 0) + 1;
+                                                }
+
+                                                chrome.storage.sync.set({ table });
+                                            });
+                                        } else console.log(`%c::[Click]:: ${count}\n::[Url]:: ${hostname}\n::[Status]:: Don't get coin number\n::[Time]:: ${time}`, `color:Green`)
+
+                                        // const boxCoin = document.querySelectorAll('[class*="MuiBackdrop-root"');
+                                        // if (boxCoin[0]) {
+                                        //     const divContent = boxCoin[0].querySelectorAll('div');
+
+                                        //     if (divContent.length > 0) {
+                                        //         const coins = parseInt(divContent[divContent.length - 1].textContent.split(' ')[0], 10);
+                                        //         if (coins !== NaN && Number.isInteger(coins)) {
+
+                                        //         } else console.log(`%c::[Click]:: ${count}\n::[Url]:: ${hostname}\n::[Status]:: Don't get coin number\n::[Time]:: ${time}`, `color:Green`)
+                                        //     } else console.log(`%c::[Click]:: ${count}\n::[Url]:: ${hostname}\n::[Status]:: No box coin\n::[Time]:: ${time}`, `color:Green`)
+                                        // } else console.log(`%c::[Click]:: ${count}\n::[Url]:: ${hostname}\n::[Status]:: No box coin\n::[Time]:: ${time}`, `color:Green`)
+                                    }, 3000);
 
 
                                 }, time);

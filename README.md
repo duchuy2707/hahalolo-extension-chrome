@@ -32,3 +32,7 @@
 1. Update Status button clicked
 2. Fix error get domain name
 3. Console more information
+
+# 1.3.4
+1. Fix error count wrong click in tab
+2. Fix error count wrong number of coins
