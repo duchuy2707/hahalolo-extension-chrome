@@ -97,7 +97,7 @@
                                                 } else if (hostname.indexOf('newsfeed') !== -1) {
                                                     table.nf = (table.nf || 0) + 1;
                                                 } else {
-                                                    table.nf = (table.nf || 0) + 1;
+                                                    table.ex = (table.ex || 0) + 1;
                                                 }
 
                                                 chrome.storage.sync.set({ table });
