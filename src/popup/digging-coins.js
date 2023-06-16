@@ -76,7 +76,7 @@
                                                     chrome.storage.sync.set({ 'oldDay': today });
                                                 }
 
-                                                console.log(`%c::[Click]:: ${count}\n::[Url]:: ${hostname}\n::[Coins]":: ${coins}\n::[Total]:: ${totalCoins}\n::[Time:: ${time}`, `color:Green`)
+                                                console.log(`%c::[Click]:: ${count}\n::[Url]:: ${hostname}\n::[Coins]:: ${coins}\n::[Total]:: ${totalCoins}\n::[Time]:: ${time}`, `color:Green`)
 
                                                 chrome.storage.sync.set({ totalCoins });
 
