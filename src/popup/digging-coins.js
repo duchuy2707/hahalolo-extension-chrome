@@ -37,6 +37,21 @@
                     let count = 0;
                     let timeout = 0;
                     let time = 5000;
+
+                    const coolConsole = () => {
+                        const logo = `
+                          ██╗  ██╗██╗   ██╗██╗   ██╗
+                          ██║  ██║██║   ██║██║   ██║
+                          ███████║██║   ██║╚██╗ ██╔╝
+                          ██╔══██║╚██╗ ██╔╝ ╚═██╔═╝ 
+                          ██║  ██║ ╚████╔╝    ██║   
+                          ╚═╝  ╚═╝  ╚═══╝    ╚══╝   
+                                           
+                        `;
+                        console.log(`%c${logo}`, 'color: #ff8a00; font-family: monospace');
+                    };
+                    coolConsole();
+                
                     console.log(`%c----------------------:: [START] ::----------------------`, `color:Green`)
                     setInterval(() => {
                         const coinBox = document.querySelector('[viewBox="0 0 800 800"]');
@@ -64,7 +79,7 @@
                                         // show số coin
                                         const hostname = window.location.href;
 
-                                        const coins = parseInt(window.localStorage.getItem('coinNumber') || 0, 10);
+                                        const coins = window.localStorage ? parseInt(window.localStorage.getItem('coinNumber') || 0, 10) : 0;
 
                                         if (coins) {
                                             chrome.storage.sync.get(['totalCoins', 'oldDay', 'table'], function (data) {
@@ -101,6 +116,8 @@
                                                 }
 
                                                 chrome.storage.sync.set({ table });
+
+                                                if (window.localStorage) window.localStorage.setItem('coinNumber', 0)
                                             });
                                         } else console.log(`%c::[Click]:: ${count}\n::[Url]:: ${hostname}\n::[Status]:: Don't get coin number\n::[Time]:: ${time}`, `color:Green`)
 

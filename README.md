@@ -40,3 +40,6 @@
 # 1.3.5
 1. Show version of extension
 2. Fix error wrong count of clicks on experience tab
+
+# 1.3.6
+1. Fix error count wrong number of coins
